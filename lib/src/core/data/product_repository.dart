@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:menteck_app/src/core/domain/interface/i_product_repository.dart';
@@ -9,6 +10,7 @@ class ProductRepository extends IProductRepository {
   final int perPage = 5;
   @override
   Future<List<Product>> getProducts({required int page}) async {
+    log(page.toString(), name: 'Page');
     List<Product> products = [];
     Response response = await post(
       Uri.parse(ApiEndPoints.products),
@@ -22,11 +24,7 @@ class ProductRepository extends IProductRepository {
     if (response.statusCode == 200) {
       var result = jsonDecode(response.body);
       ProductRes? productRes = ProductRes.fromJson(result);
-      if (productRes.products!.isNotEmpty) {
-        for (var product in productRes.products!) {
-          products.add(product);
-        }
-      }
+      products.addAll(productRes.products!);
     } else {
       throw Exception(response.reasonPhrase);
     }

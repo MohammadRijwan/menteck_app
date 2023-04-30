@@ -9,11 +9,25 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   ProductBloc(this._productUsecase) : super(ProductLoadingState()) {
     List<Product> products = [];
+    int page = 1;
     on<LoadProductEvent>((event, emit) async {
-      emit(ProductLoadingState());
+      if (page == 1) {
+        emit(ProductLoadingState());
+      }
       try {
-        products = await _productUsecase.getProducts(page: 1);
-        emit(ProductLoadedState(products));
+        List<Product> productList =
+            await _productUsecase.getProducts(page: page);
+        if (productList.isNotEmpty) {
+          products.addAll(productList);
+          if (page != 1) {
+            emit(AddedProductState('Scroll to load more'));
+          }
+          emit(ProductLoadedState(products));
+          page++;
+        } else {
+          emit(AddedProductState('No products found'));
+          emit(ProductLoadedState(products));
+        }
       } catch (e) {
         emit(ProductErrorState(e.toString()));
       }
@@ -28,9 +42,5 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   Future<void> close() {
     _productUsecase.close();
     return super.close();
-  }
-
-  void fetchProduct() {
-    print("Fetching product");
   }
 }
