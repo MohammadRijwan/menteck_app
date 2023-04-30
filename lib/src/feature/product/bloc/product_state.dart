@@ -5,7 +5,6 @@ import 'package:menteck_app/src/core/domain/model/product_model.dart';
 @immutable
 abstract class ProductState extends Equatable {}
 
-//data loading state
 class ProductLoadingState extends ProductState {
   @override
   List<Object?> get props => [];

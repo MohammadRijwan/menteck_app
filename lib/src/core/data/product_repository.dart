@@ -16,8 +16,7 @@ class ProductRepository extends IProductRepository {
       Uri.parse(ApiEndPoints.products),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer eyJhdWQiOiI1IiwianRpIjoiMDg4MmFiYjlmNGU1MjIyY2MyNjc4Y2FiYTQwOGY2MjU4Yzk5YTllN2ZkYzI0NWQ4NDMxMTQ4ZWMz'
+        'Authorization': 'Bearer ${ApiEndPoints.authToken}'
       },
       body: json.encode({"page": page, "perPage": perPage}),
     );
