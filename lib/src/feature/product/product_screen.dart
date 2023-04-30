@@ -11,7 +11,8 @@ import 'bloc/product_event.dart';
 import 'bloc/product_state.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
+  ProductScreen({super.key});
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class ProductScreen extends StatelessWidget {
                 ),
               );
             }
+            return;
           },
           builder: (context, state) {
             if (state is ProductLoadingState) {
@@ -51,9 +53,16 @@ class ProductScreen extends StatelessWidget {
               );
             }
             if (state is ProductLoadedState) {
-              ProductRes productRes = state.productRes;
-              List<Product> productList = productRes.products!;
+              List<Product> productList = state.productRes;
               return GridView.builder(
+                controller: _scrollController
+                  ..addListener(() {
+                    if (_scrollController.offset ==
+                        _scrollController.position.maxScrollExtent) {
+                      BlocProvider.of<ProductBloc>(context)
+                          .add(LoadProductEvent());
+                    }
+                  }),
                 itemCount: productList.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (_, index) {

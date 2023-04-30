@@ -9,7 +9,7 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case productScreen:
-        return MaterialPageRoute(builder: (_) => const ProductScreen());
+        return MaterialPageRoute(builder: (_) => ProductScreen());
       case cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
 

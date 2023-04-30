@@ -11,6 +11,8 @@ void main() {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -36,7 +38,7 @@ class _MyAppState extends State<MyApp> {
           DeviceOrientation.landscapeLeft,
           DeviceOrientation.landscapeRight,
         ]);
-        return const ProductScreen();
+        return ProductScreen();
       }),
     );
   }

@@ -25,8 +25,8 @@ class ProductUseCase {
     await _cartUsecase.close();
   }
 
-  Future<ProductRes> getProducts() async {
-    return _repository.getProducts();
+  Future<List<Product>> getProducts({required int page}) async {
+    return _repository.getProducts(page: page);
   }
 
   Future<String?> addProduct(AddProductEvent event) async {
