@@ -35,9 +35,10 @@ class ShoppingCard extends StatelessWidget {
                 )),
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
                     child: Text(
