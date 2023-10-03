@@ -124,7 +124,7 @@ class CartScreen extends StatelessWidget {
             }
             if (state is CartErrorState) {
               return const Center(
-                child: Text("Error"),
+                child: Text("Something went wrong please provide valid information"),
               );
             }
             return Container();
