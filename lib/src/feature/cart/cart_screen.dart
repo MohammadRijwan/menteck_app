@@ -127,7 +127,7 @@ class CartScreen extends StatelessWidget {
                 child: Text("Something went wrong please provide valid information"),
               );
             }
-            return Container();
+            return SizedBox(height:100, width:100);
           },
         ),
       ),
